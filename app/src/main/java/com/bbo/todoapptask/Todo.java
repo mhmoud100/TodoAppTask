@@ -1,12 +1,13 @@
 package com.bbo.todoapptask;
 
 public class Todo {
-    private String title, desc;
+    private int id;
+    private String title;
     private Boolean isCompleted;
 
-    public Todo(String title, String desc, Boolean isCompleted) {
+    public Todo(String title, int id, Boolean isCompleted) {
         this.title = title;
-        this.desc = desc;
+        this.id = id;
         this.isCompleted = isCompleted;
     }
 
@@ -18,12 +19,12 @@ public class Todo {
         this.title = title;
     }
 
-    public String getDesc() {
-        return desc;
+    public int getId() {
+        return id;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Boolean getCompleted() {
