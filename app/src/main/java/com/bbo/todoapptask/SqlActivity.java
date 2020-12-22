@@ -2,6 +2,7 @@ package com.bbo.todoapptask;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,14 +26,25 @@ public class SqlActivity extends AppCompatActivity {
     ArrayList<Todo> todos;
     FloatingActionButton add;
     TodosDatabase database;
+    private NotificationManagerCompat notificationManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sql);
         todoList = findViewById(R.id.todo_list);
+        notificationManager = NotificationManagerCompat.from(this);
         add = findViewById(R.id.add);
         database = new TodosDatabase(this);
         todos = new ArrayList<>();
+
+        int comming = getIntent().getIntExtra("Comming", 0);
+        System.out.println(comming);
+        if(comming == 1){
+            notificationManager.cancel(1);
+            database.insertNewTodo("1", false);
+            database.insertNewTodo("2", true);
+
+        }
         todos = database.getTodosData();
         adapter = new TodoAdapter(this, todos, "Sql");
         todoList.setAdapter(adapter);
